@@ -12,12 +12,11 @@ pages  :)
 
 
 __inded.html
-    {
+   
+   *contains search bar
      
-     *contains search bar
-     
-     *favourites button
-    }
+   *favourites button
+   
 
 __details.html :)
   
