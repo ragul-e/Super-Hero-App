@@ -51,8 +51,8 @@ __POWERSTATS
         
     ---CONNECTIONS
     }
-|___favourite.html  :)
-    {
-     contains favourite cards.
-    }
+|___favourite.html
+
+    contains favourite cards.
+   
     cmake and ninja built system is for  getting fast response 
