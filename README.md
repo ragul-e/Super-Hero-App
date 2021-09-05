@@ -11,7 +11,7 @@ images and fonts used.
 pages  :)
 
 
----inded.html
+__inded.html
     {
      
      *contains search bar
@@ -19,15 +19,15 @@ pages  :)
      *favourites button
     }
 
----details.html :)
+__details.html :)
   
     
    contains details about heros like
 
 
----POWERSTATS
+__POWERSTATS
     
-    ---intelligence
+    ---INTELLIGENCE
     
         + strength
         + speed
