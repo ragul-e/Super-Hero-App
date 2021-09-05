@@ -51,7 +51,7 @@ __POWERSTATS
         
     ---CONNECTIONS
     }
-|___favourite.html
+  ___favourite.html
 
     contains favourite cards.
    
