@@ -1,0 +1,441 @@
+<html>    
+    <head>
+        <meta charset="UTF-8">
+        <title>Details Page</title>
+        // css code !
+        <style>
+         @font-face{
+    font-family: xolonium;
+    src:url(../assests/fonts/xolonium/Xolonium-Regular.ttf)
+}
+
+*{
+    font-family: Xolonium;
+    color: white;
+    background-color: black;
+}
+
+#alert{
+    position: absolute;
+    top: 30px;
+    border-radius: 10px;
+    z-index: 99;
+    width: max-content;
+    text-align: center;
+    padding: 5px;
+    float: right;
+    right: 250px;
+    transition-duration: 800ms;
+}
+
+.success{
+    color: black;
+    background-color: red;
+}
+
+.failure{
+    color: black;
+    background-color: yellow;
+}
+
+body, html{
+    margin: 0;
+}
+
+body{
+    position: relative;
+    height: 100%;
+}
+
+header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80px;
+    margin: auto;
+    display: inline-flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 15px 0px rgb(13, 60, 218);
+    z-index: 99;
+}
+
+header *{
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.favourite-router *{
+    border-radius: 10px;
+}
+
+.favourite-router *:hover{
+    color: red;
+}
+
+.app-name{
+    padding-left: 20px;
+}
+
+.app-name a{
+    text-decoration: none;
+    color: rgb(25, 14, 182);
+}
+
+header button{
+    margin-right: 20px;
+}
+
+header button a{
+    text-decoration: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 1vh;
+}
+
+#top-bar{
+    position: fixed;
+    top: 80px;
+    left: 0px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    box-shadow: 0px 0px 15px 0px #0c22e7d5;
+    z-index: 10;
+}
+
+#top-bar *{
+    padding: 20px 0px 20px 0px;
+    text-decoration: none;
+}
+
+#top-bar *:hover{
+    color: rgb(12, 26, 231);
+}
+
+.anchor{
+    display: block;
+    height: 200px; /*same height as header*/
+    margin-top: -200px; /*same height as header*/
+    visibility: hidden;
+}
+
+
+#data-container{
+    position: relative;
+    margin-top: 200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    background-color: rgba(0, 0, 0, 0);
+
+}
+
+#image{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin-left: 30px;
+    padding: 100px;
+    align-items: center;
+}
+
+#fav_btn{
+    margin-top: 30px;
+    box-shadow: 0px 0px 15px 0px #ff2121;
+    border-radius: 100%;
+}
+
+#detail-container{
+    position: relative;
+    width: 70%;
+}
+
+.detail-item{
+    padding: 20px;
+    width: 80%;
+}
+
+#stats-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+}
+
+#stat-names{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding-right: 20px;
+}
+
+#stat-names span{
+    display: block;
+    padding: 15px;
+    font-weight: bold;
+}
+
+#stat-bars{
+    width: 80%;
+}
+
+.bar-container{
+    background-color: rgba(5, 5, 5, 0.911);
+    width: 60%;
+    padding: 5px;
+}
+
+.bar{
+    background-color: rgb(31, 9, 228);
+    border-radius: 10px;
+    padding: 10px;
+    transition-duration: 600ms;
+}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="app-name center"><a href='index.html'>SuperHeros</a></div>
+            <div class="favourite-router center">
+                <button><a href="favourite.html">FAVOURITES</a></button>
+            </div>
+        </header>
+
+        <!-- Notification Alert -->
+        <div id="alert" style="visibility:hidden" class="success">Success Message</div>
+        <div id="alert" style="visibility:hidden" class="failure">Error Message</div>
+
+
+        <div id="main-container">
+            <!-- A navigation bar -->
+            <div id="top-bar">
+                <div><a href="#powerstats">Powerstats</a></div>
+                <div><a href="#appearance-target">Appearance</a></div>
+                <div><a href="#biography-target">Biography</a></div>
+                <div><a href="#occupation-target">Occupation</a></div>
+                <div><a href="#connections-target">Connections</a></div>
+            </div>
+
+            <!-- Hero data will be appended here -->
+            <div id='data-container'>
+                <!-- Image of the hero -->
+                <div id="image">
+                    <img width="400" height="400">
+                    <img id="fav_btn" width="50" >
+                </div>
+
+                <div id="detail-container">
+                    <div class="detail-item">
+
+                        <!-- Powerstats bars -->
+                        <span class="anchor" id="powerstats"></span>
+                        <h1 id="powerstats">Powerstats</h1>
+                        <div id="stats-container">
+                            <div id="stat-names">
+                                <span>Combat</span>
+                                <span>Durability</span>
+                                <span>Intelligence</span>
+                                <span>Power</span>
+                                <span>Speed</span>
+                                <span>Strength</span>
+                            </div>
+
+                            <div id="stat-bars">
+                                <div class="bar-container">
+                                    <div class="bar combat" style="width: 0%;">.</div>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar durability" style="width: 0%;">.</div>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar intelligence" style="width: 0%;">.</div>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar power" style="width: 0%;">.</div>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar speed" style="width: 0%;">.</div>
+                                </div>
+                                <div class="bar-container">
+                                    <div class="bar strength" style="width: 0%;">.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <span class="anchor" id="appearance-target"></span>
+                        <h1>Appearance</h1>
+                        <section id="appearance">...</section>
+                    </div>
+                    <div class="detail-item">
+                        <span class="anchor" id="biography-target"></span>
+                        <h1>Biography</h1>
+                        <section id="biography">...</section>
+                    </div>
+                    <div class="detail-item">
+                        <span class="anchor" id="occupation-target"></span>
+                        <h1>Occupation</h1>
+                        <section id="occupation">...</section>
+                    </div>
+                    <div class="detail-item">
+                        <span class="anchor" id="connections-target"></span>
+                        <h1>Connections</h1>
+                        <section id="connections">...</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        // javascript 
+        <script >
+            const access_token = "1046114982791427";
+const api_url = "https://www.superheroapi.com/api.php/"+access_token+"/";
+const favFalse = '..assests/images/whitestar/whitestar.png';
+const favTrue =  '..assests/images/redstar/redstar.png';
+
+driver();
+
+async function driver(){
+    const id = extractId();
+    const data = await getInfo(id);
+    renderPage(data);
+}
+
+// Handling the click events
+document.addEventListener('click', (event) => {
+    // Fav button
+    if(event.target.id == 'fav_btn'){
+        var id = event.target.parentNode.parentNode.name;
+        var favs = JSON.parse(localStorage.getItem('superheroFavs'));
+        if (favs.indexOf(id) != -1){            // Remove from fav
+            favs = favs.filter((item) => item!=id);
+            localStorage.setItem('superheroFavs',JSON.stringify(favs));
+            event.target.src = favFalse;
+            customAlert('failure','Removed from fav');
+        }
+        else{                                   // Add to fav
+            favs.push(id);
+            localStorage.setItem('superheroFavs',JSON.stringify(favs));
+            event.target.src = favTrue;
+            customAlert('success','Added to fav');
+        }
+    }
+});
+
+
+
+//Extracting ID from url
+function extractId(){
+    const url = location.search;
+    return url.substring(url.indexOf('=')+1);
+}
+
+// Function to call the API
+async function getInfo(id){
+    let response = await fetch(api_url+id);
+    if(response.ok){
+        var jsonData = await response.json();
+        console.log(jsonData);
+        return jsonData;
+    }
+    else{
+        alert("HTTP-Error: ",response.status);
+    }
+}
+
+
+function renderPage(data){
+    document.getElementById('data-container').name = data.id;
+
+    // Setting image of the hero
+    var image = document.getElementById('image');
+    image.firstElementChild.src = `${data.image.url}`;
+    
+    // Setting the fav icon
+    var favs = JSON.parse(localStorage.getItem('superheroFavs'));
+    if(favs.indexOf(data.id) != -1){
+        image.lastElementChild.src = favTrue;
+    }
+    else{
+        image.lastElementChild.src = favFalse;
+    }
+
+
+    // Powerstats
+    var combat = document.getElementsByClassName('combat');
+    combat[0].innerHTML = `${data.powerstats.combat}`;
+    combat[0].style = `width: ${data.powerstats.combat}%;`;
+
+    var durability = document.getElementsByClassName('durability');
+    durability[0].innerHTML = `${data.powerstats.durability}`;
+    durability[0].style = `width: ${data.powerstats.durability}%;`;
+
+    var intelligence = document.getElementsByClassName('intelligence');
+    intelligence[0].innerHTML = `${data.powerstats.intelligence}`;
+    intelligence[0].style = `width: ${data.powerstats.intelligence}%;`;
+
+    var power = document.getElementsByClassName('power');
+    power[0].innerHTML = `${data.powerstats.power}`;
+    power[0].style = `width: ${data.powerstats.power}%;`;
+
+    var speed = document.getElementsByClassName('speed');
+    speed[0].innerHTML = `${data.powerstats.speed}`;
+    speed[0].style = `width: ${data.powerstats.speed}%;`;
+
+    var strength = document.getElementsByClassName('strength');
+    strength[0].innerHTML = `${data.powerstats.strength}`;
+    strength[0].style = `width: ${data.powerstats.strength}%;`;
+
+    // Appearance
+    document.getElementById('appearance').innerHTML = makePresentable(data.appearance);
+    // Biography
+    document.getElementById('biography').innerHTML = makePresentable(data.biography);
+    // Occupation
+    document.getElementById('occupation').innerHTML = makePresentable(data.work);
+    // Connections
+    document.getElementById('connections').innerHTML = makePresentable(data.connections);
+}
+
+// Converting JSON objects to paragraph
+function makePresentable(jsonData){
+    var str='';
+    for (var key in jsonData){
+        str += 
+            '<p><b>'+key.charAt(0).toUpperCase()+key.slice(1) +'</b> : '+ jsonData[key]+ '</p>';
+    }
+    return str;
+}
+
+// For changing visibility of alert box
+function customAlert(type, message){
+    var element = document.getElementsByClassName(type);
+    element[0].innerHTML = message;
+    element[0].style.visibility = "visible"
+    setTimeout(() => {
+        element[0].style.visibility = "hidden";
+    }, 1500);
+}
+        </script>
+    </body>
+
+</html>

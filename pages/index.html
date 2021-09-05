@@ -1,0 +1,323 @@
+<html>    
+    <head>
+        <meta charset="UTF-8">
+       
+        <title>Home</title>
+        /*css code*/
+        <style>
+         @font-face{
+    font-family: xolonium;
+    src: url(../assests/fonts/xolonium/Xolonium-Regular.ttf);
+}
+
+*{
+    font-family: Xolonium;
+    color: rgb(224, 225, 240);
+    background-color: rgb(5, 2, 24);
+}
+
+#alert{
+    position: absolute;
+    top: 30px;
+    border-radius: 10px;
+    z-index: 99;
+    width: max-content;
+    text-align: center;
+    padding: 5px;
+    float: right;
+    right: 250px;
+    transition-duration: 800ms;
+}
+
+.success{
+    color: black;
+    background-color: red;
+}
+
+.failure{
+    color: black;
+    background-color: yellow;
+}
+
+
+body, html{
+    margin: 0;
+}
+
+body{
+    position: relative;
+    height: 100%;
+}
+
+header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80px;
+    margin: auto;
+    display: inline-flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 15px 0px rgb(16, 12, 201);
+    z-index: 99;
+}
+
+header *{
+    font-size: 1.6rem;
+    text-decoration: none;
+}
+
+.favourite-router *{
+    border-radius: 10px;
+}
+
+.favourite-router *:hover{
+    color: rgb(6, 10, 223);
+}
+
+.app-name{
+    padding-left: 20px;
+}
+
+.app-name a{
+    text-decoration: none;
+    color: rgb(21, 19, 185);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+header input{
+    height: 35px;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgb(35, 15, 216);
+    border-radius: 25px;
+}
+
+header input:focus{
+    border: 3px solid rgb(4, 19, 226);
+}
+
+header button{
+    margin-right: 20px;
+}
+
+header button a{
+    text-decoration: none;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Main result body */
+#result-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 80px;
+}
+
+#results{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+
+/* Cards */
+.card-container{
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 280px;
+    border: 2px solid rgb(42, 4, 233);
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px 0px #646464;
+}
+
+.card-img-container img{
+    height: 180px;
+    width: 180px;
+    border-radius: 15px;
+}
+
+.card-name{
+    padding: 5px;
+}
+
+.card-name:hover{
+    color: rgb(245, 22, 59);
+    cursor: pointer;
+}
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="app-name center"><a href='index.html'>SuperHeros</a></div>
+            <div class="search-container center">
+                <input type="text" id="search-data" placeholder=" search......">
+            </div>
+            <div class="favourite-router center">
+                <button><a href="favourite.html">FAVOURITES</a></button>
+            </div>
+        </header>
+        
+
+        <!-- Notification Alert -->
+        <div id="alert" style="visibility:hidden" class="success">Success Message</div>
+        <div id="alert" style="visibility:hidden" class="failure">Error Message</div>
+
+
+        <!-- Main Search results -->
+        <div id="result-container">
+            <div id='results'>
+
+                Search your hero
+        
+            </div>
+        </div>
+        
+        //  javascript code !!
+        <script>
+        const access_token = '1046114982791427';
+        const url = 'https://superheroapi.com/api.php/'+access_token+'/search/';
+        const favFalse = '../assests/images/whitestar/whitestar.png';
+        const favTrue = '..assests/images/redstar/redstar.png';
+
+
+           // create object for this app in localStorage if not present
+        checkLocalStorage();
+
+          // main search event
+        const searchBar = document.getElementById('search-data');
+        searchBar.addEventListener('keyup', (e)=> {
+        const searchString = e.target.value;
+        console.log("Searching for: ",searchString);
+        if (searchString.length < 2){       // avoiding huge number of search results
+        document.getElementById('results').innerHTML = 'Add atleast 3 characters';
+        }
+        else{
+        searchHero(searchString);
+        }
+        });
+
+// Initialize localStorage entry
+function checkLocalStorage(){
+    if (localStorage.getItem('superheroFavs')==null){
+        localStorage.setItem('superheroFavs', JSON.stringify(Array()));
+    }
+}
+
+// Handling details, add favourite actions
+document.addEventListener('click', (event) => {
+    // Details button
+    if(event.target.id == 'details_btn'){
+        var id = event.target.parentNode.id;
+        window.open('./details.html'+'?id='+id, "_self");
+    }
+    // Favourite button
+    else if(event.target.id == 'add_fav_btn'){
+        var id = event.target.parentNode.parentNode.id;
+        var favs = JSON.parse(localStorage.getItem('superheroFavs'));
+        // fav button decide
+        if (favs.indexOf(id) != -1){
+            favs = favs.filter((item) => item!=id);
+            localStorage.setItem('superheroFavs',JSON.stringify(favs));
+            event.target.src = favFalse;
+            customAlert('failure','Removed from fav');
+        }
+        else{
+            favs.push(id);
+            localStorage.setItem('superheroFavs',JSON.stringify(favs));
+            event.target.src = favTrue;
+            customAlert('success','Added to fav');
+        }
+    }
+});
+
+
+        async function searchHero(searchString){
+    
+         // Calling API
+         let response = await fetch(url+searchString);
+         if (response.ok) { // if HTTP-status is 200-299
+         renderData(await response.json());
+        }
+        else {
+        alert("HTTP-Error: " + response.status);
+        }
+}
+
+        function renderData(data){
+        // Checking if there's anything found
+        if(data.response=='error' || data.results.length === 0){
+        document.getElementById('results').innerHTML = data.error;   
+        }
+         else{
+        // deleting previous results
+        var results = document.getElementById('results');
+        results.remove();
+
+        // Creating new results
+        var result_container = document.getElementById('result-container');
+        var results = document.createElement('DIV');
+        results.id = 'results';
+        result_container.appendChild(results);
+        
+        // rendering each heroes
+        data.results.forEach((element) => {
+            results.appendChild(getCard(element));
+        });
+    }
+}
+
+
+        function getCard(data){
+        // Card container
+        var cardContainer = document.createElement('DIV');
+        cardContainer.className = 'card-container center';
+        cardContainer.id = data.id;
+        var srcFav;
+        var favs = JSON.parse(localStorage.getItem('superheroFavs'));
+        // Checking if the hero is fav or not
+        if(favs.indexOf(data.id) !== -1){
+        srcFav = favTrue;
+        }
+        else{
+        srcFav = favFalse;
+        }
+        cardContainer.innerHTML = `
+        <div class="card-img-container">
+            <img src="${data.image.url}">
+        </div>
+        <div id="details_btn" class="card-name">${data.name}</div>
+        <div class="card-btns">
+            <img id="add_fav_btn" src="${srcFav}" width="25">
+        </div>
+    `
+        return cardContainer;
+}
+
+        // For changing visibility of alert box
+        function customAlert(type, message){
+        var element = document.getElementsByClassName(type);
+        element[0].innerHTML = message;
+        element[0].style.visibility = "visible"
+        setTimeout(() => {
+        element[0].style.visibility = "hidden";
+    }, 1500);
+}
+        </script>
+    </body>
+</html>
