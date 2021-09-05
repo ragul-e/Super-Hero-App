@@ -5,13 +5,14 @@ superhero web application is developed
 by using html, css, javascript and 
 superheroAPI (UNIQUE TOKEN BY FACEBOOK) 
 
-__assest :)
+__assest 
   
   images and fonts used.
 
-__pages :)
+__pages 
 
   inded.html__(:contains search bar favourites button:)
+  
   details.html____(:contains details about heros like:)
 
 
