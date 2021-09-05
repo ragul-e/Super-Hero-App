@@ -5,10 +5,11 @@ by using html, css, javascript
 superhero API(UNIQUE TOKEN BY FACEBOOK) 
 
 assest :)
-|
 images and fonts used.
 
 pages  :)
+
+
 |___inded.html
     {
      *contains search bar
@@ -16,10 +17,12 @@ pages  :)
     }
 |___details.html :)
     {
-    ---contains details about heros like
-    ---POWERSTATS
     
-        + intelligence
+    
+---contains details about heros like
+---POWERSTATS
+    
++ intelligence
         + strength
         + speed
         + durability
