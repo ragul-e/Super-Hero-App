@@ -2,8 +2,8 @@
 
 
 superhero web application is developed 
-by using html, css, javascript 
-superhero API(UNIQUE TOKEN BY FACEBOOK) 
+by using html, css, javascript and 
+superheroAPI (UNIQUE TOKEN BY FACEBOOK) 
 
 assest :)
 images and fonts used.
