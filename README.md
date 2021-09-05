@@ -11,16 +11,20 @@ images and fonts used.
 pages  :)
 
 
-|___inded.html
+---inded.html
     {
+     
      *contains search bar
+     
      *favourites button
     }
-|___details.html :)
-    {
+
+---details.html :)
+  
     
-    
----contains details about heros like
+   contains details about heros like
+
+
 ---POWERSTATS
     
     ---intelligence
