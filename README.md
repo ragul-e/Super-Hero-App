@@ -1,4 +1,4 @@
-# SuperHeroApp click me :) https://ragul-e.github.io/superHeroApp/pages/index.html
+# SuperHeroApp https://ragul-e.github.io/superHeroApp/pages/index.html
 
 
 superhero web application is developed 
